@@ -4,7 +4,7 @@ const mainData = (() => {
         const dropdownBtn = document.querySelector('.header__menu .dropdown')
         ganres.forEach((ganre) => {
             dropdownBtn.insertAdjacentHTML('beforeend', `
-                <li><a href="./categories.html?ganre=${ganre}">${ganre}</a></li>
+                <li><a href="./categories.html?gange=${ganre}">${ganre}</a></li>
             `)
 
         })
@@ -30,7 +30,7 @@ const mainData = (() => {
 
 
     const generateContainerByGanres = (data, ganres) => {
-        const container = document.querySelector('.product.spad .col-lg-8')
+        const container = document.querySelector('.product-page.spad .col-lg-8')
 
         ganres.forEach((ganre) => {
             const blockTitle = document.createElement('div')
@@ -55,7 +55,7 @@ const mainData = (() => {
             `)
 
 
-            data.filter(((item) => item.ganre === ganre)).forEach((el) => {
+            data.filter(((item) => item.tags.includes(ganre))).forEach((el) => {
                 const ganresTagsList = document.createElement('ul')
 
                 el.tags.forEach((tag) => {
@@ -97,13 +97,20 @@ const mainData = (() => {
         .then((response) => response.json())
         .then((data) => {
             const ganres = new Set
+            const ganreParam = new URLSearchParams(window.location.search).get('ganre')
+
 
             data.forEach((item) => {
                 ganres.add(item.ganre)
             })
 
             renderTopViews(data.sort((a, b) => b.views - a.views).slice(0, 5))
-            generateContainerByGanres(data, ganres)
+            console.dir(ganreParam);
+            if (ganreParam) {
+                generateContainerByGanres(data, [ganreParam])
+            } else {
+                generateContainerByGanres(data, ganres)
+            }
             generateDropdownList(ganres)
         })
 
