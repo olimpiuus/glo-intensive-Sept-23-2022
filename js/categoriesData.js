@@ -31,6 +31,7 @@ const mainData = (() => {
 
     const generateContainerByGanres = (data, ganres) => {
         const container = document.querySelector('.product-page.spad .col-lg-8')
+        const preloder = document.querySelector('.preloder')
 
         ganres.forEach((ganre) => {
             const blockTitle = document.createElement('div')
@@ -85,11 +86,10 @@ const mainData = (() => {
                 const src = el.dataset.setbg
                 el.style.backgroundImage = `url(${src})`
             })
-
-
-
-
         })
+        const timer = setTimeout(() => {
+            preloder.classList.remove('active')
+        }, 500)
     }
 
 

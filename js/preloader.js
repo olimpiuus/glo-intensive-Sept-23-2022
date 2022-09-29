@@ -4,5 +4,5 @@ const preloder = (() => {
 
     const timer = setTimeout(() => {
         preloder.classList.remove('active')
-    }, 1000)
+    }, 500)
 })()

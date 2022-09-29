@@ -1,5 +1,6 @@
 const mainData = (() => {
 
+
     const generateDropdownList = (ganres) => {
         const dropdownBtn = document.querySelector('.header__menu .dropdown')
         ganres.forEach((ganre) => {
@@ -31,6 +32,7 @@ const mainData = (() => {
 
     const generateContainerByGanres = (data, ganres) => {
         const container = document.querySelector('.product.spad .col-lg-8')
+        const preloder = document.querySelector('.preloder')
 
         ganres.forEach((ganre) => {
             const blockTitle = document.createElement('div')
@@ -90,6 +92,9 @@ const mainData = (() => {
 
 
         })
+        const timer = setTimeout(() => {
+            preloder.classList.remove('active')
+        }, 500)
     }
 
 
